@@ -30,7 +30,7 @@ public class SecurityConfig {
     @Bean
 public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     return http
-        .cors()  // Habilita CORS con la configuración que pongas en el bean CorsConfigurationSource
+        .cors()  
         .and()
         .csrf(AbstractHttpConfigurer::disable)
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

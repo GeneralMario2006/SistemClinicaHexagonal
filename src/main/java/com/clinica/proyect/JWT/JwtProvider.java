@@ -23,8 +23,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtProvider {
 
-    private static final String SECRET_KEY = "MySecretKeyForJWTTokenGenerationMySecretKey"; // mínimo 32 caracteres
-    private static final long EXPIRATION_TIME = 86_400_000L; // 1 día en milisegundos
+    private static final String SECRET_KEY = "MySecretKeyForJWTTokenGenerationMySecretKey";
+    private static final long EXPIRATION_TIME = 86_400_000L; 
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes(StandardCharsets.UTF_8));

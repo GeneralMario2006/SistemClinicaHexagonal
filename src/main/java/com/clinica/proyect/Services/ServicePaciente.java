@@ -17,8 +17,6 @@ public class ServicePaciente {
     @Autowired
     PacientesValidaciones validar;
     
-   
-    
     public void addPaciente(Paciente p) {
         try{
         if (!validar.ExistYCrearPaciente(p)) {
@@ -33,9 +31,4 @@ public class ServicePaciente {
     public PacienteDTOretorno BuscarPaciente(Long dui) {
         return validar.retornarInfo(dui);   
     }
-    
-    /*public boolean esPacienteOno(Principal principal) {
-        return repositoryPaciente.findByCorreo(principal.getName()).isPresent();
-    }
-    */
 }

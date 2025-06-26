@@ -47,14 +47,13 @@ public class PDFservice {
             String folderPath = "historiales";
             File folder = new File(folderPath);
             if (!folder.exists()) {
-                folder.mkdirs(); // crea la carpeta
+                folder.mkdirs();
             }
 
             String nombrePaciente = citaId.getPaciente().getNombre().replaceAll("[^a-zA-Z0-9]", "_");
             String fileName = "Historial_" + nombrePaciente + "_" + citaId.getId() + ".pdf";
             String ruta = folderPath + File.separator + fileName;
-
-            // Crear documento PDF
+            
             Document document = new Document();
             OutputStream outOut = new FileOutputStream(ruta);
             PdfWriter.getInstance(document, outOut);

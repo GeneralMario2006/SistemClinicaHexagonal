@@ -12,7 +12,7 @@ MedicosValidaciones validarMedico;
 
     public void AñadirYVerificarMedico(Medico medico) {
         if (validarMedico.validarMedico(medico.getCorreoInstitucional())) {
-            System.out.println("YA EXISTE");
+            System.out.println("EL MEDICO YA EXISTE");
             return;
         }
         validarMedico.añadirMedico(medico);

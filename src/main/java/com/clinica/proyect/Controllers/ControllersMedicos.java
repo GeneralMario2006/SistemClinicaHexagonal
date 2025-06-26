@@ -63,8 +63,7 @@ public class ControllersMedicos {
         )
     );
         MedicoDetails medicoDetails = (MedicoDetails) authentication.getPrincipal();
-
-         // Validar que el usuario tenga el rol PACIENTE
+        
         boolean tieneRolPaciente = medicoDetails.getAuthorities().stream()
                 .anyMatch(auth -> auth.getAuthority().equals("ROLE_MEDICO"));
 

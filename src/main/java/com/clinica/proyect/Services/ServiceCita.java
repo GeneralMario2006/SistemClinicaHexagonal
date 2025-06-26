@@ -48,15 +48,10 @@ public class ServiceCita {
         String correoAutenticado = principal.getName();
 
         try {
-            // Verificamos si es médico
             boolean esMedico = medicoRepository.findByCorreoInstitucional(correoAutenticado).isPresent();
-            System.out.println(esMedico);
-
-            // Verificamos si es el mismo paciente
             boolean esMismoPaciente = correoAutenticado.equals(correoUrl);
-            System.out.println(esMismoPaciente);
 
-            // Si no es médico ni es el paciente dueño del correo, denegamos el acceso
+            // Si no es médico ni es el paciente dueño del correo denegar
             if (!esMedico && !esMismoPaciente) {
                 throw new AccessDeniedException("No tienes permitido realizar esta acción");
             }
