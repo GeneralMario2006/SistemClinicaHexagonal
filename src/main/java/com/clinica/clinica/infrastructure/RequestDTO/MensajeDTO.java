@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.clinica.proyect.DTOS;
+package com.clinica.clinica.infrastructure.RequestDTO;
 
 /**
  *
  * @author mr587
  */
 public class MensajeDTO {
+    
     private String contenido;
     
     public String correo;
@@ -16,8 +17,9 @@ public class MensajeDTO {
     public MensajeDTO() {
     }
 
-    public MensajeDTO(String contenido, String correo) {
+    public MensajeDTO( String contenido, String correo) {
         this.contenido = contenido;
+       
         this.correo= correo;
     }
 
@@ -38,6 +40,7 @@ public class MensajeDTO {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
 
     
 }

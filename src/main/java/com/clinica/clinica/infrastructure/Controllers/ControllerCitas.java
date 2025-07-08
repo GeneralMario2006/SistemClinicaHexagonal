@@ -3,7 +3,6 @@ package com.clinica.clinica.infrastructure.Controllers;
 import com.clinica.clinica.Application.Service.ServiceCita;
 import com.clinica.clinica.domain.CitasDomain;
 import com.clinica.clinica.infrastructure.RequestDTO.CitaDTO;
-import com.clinica.clinica.infrastructure.Entitys.Citas;
 import com.clinica.clinica.infrastructure.Mappers.MapperCitas;
 import java.security.Principal;
 import java.util.List;

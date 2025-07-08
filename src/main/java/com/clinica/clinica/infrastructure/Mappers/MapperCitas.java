@@ -5,18 +5,16 @@
 package com.clinica.clinica.infrastructure.Mappers;
 
 import com.clinica.clinica.domain.CitasDomain;
+import com.clinica.clinica.domain.DomainDtos.UpdateCitaDto;
 import com.clinica.clinica.domain.MedicoDomain;
 import com.clinica.clinica.domain.PacientesDomain;
 import com.clinica.clinica.infrastructure.Entitys.Citas;
 import com.clinica.clinica.infrastructure.Entitys.Medico;
 import com.clinica.clinica.infrastructure.Entitys.Paciente;
+import com.clinica.clinica.infrastructure.RequestDTO.ActualizarCitasDTO;
 import com.clinica.clinica.infrastructure.RequestDTO.CitaDTO;
 import org.mapstruct.Mapper;
 
-/**
- *
- * @author mr587
- */
 @Mapper(componentModel = "spring")
 public interface MapperCitas {
     public default CitasDomain EntityToDomain(Citas citaEntity) {
@@ -24,9 +22,11 @@ public interface MapperCitas {
                 new PacientesDomain(citaEntity.getPaciente().getId(), citaEntity.getPaciente().getNombre(), citaEntity.getPaciente().getCorreo(), 
                         citaEntity.getPaciente().getDui(), citaEntity.getPaciente().getFechaNacimiento(), citaEntity.getPaciente().getTelefono(), 
                         citaEntity.getPaciente().getContraseña(), citaEntity.getPaciente().getRol()),
+                
                 new MedicoDomain(citaEntity.getMedico().getId(),  citaEntity.getMedico().getCorreoInstitucional(),  citaEntity.getMedico().getNombre(), 
                 citaEntity.getMedico().getEspecialidad(),  citaEntity.getMedico().getContraseña(),  citaEntity.getMedico().getHorarioInicio(), 
                 citaEntity.getMedico().getHorarioCierre()), 
+                
                     citaEntity.getFechaCita(),
                     citaEntity.getEstado(), 
                     citaEntity.getMotivo()
@@ -58,7 +58,15 @@ public interface MapperCitas {
                 citaDto.getFechaCita(),
                     null,
                     citaDto.getMotivo()
-            );
-            
+            ); 
         }
+        
+            public default UpdateCitaDto UpdateDtoToDomain(ActualizarCitasDTO dto) {
+                return new UpdateCitaDto(
+                dto.getIdCita(), 
+                        dto.getDiagnostico(),
+                        dto.getMedicamentos(),
+                        dto.getObservacion()
+                );
+            }
 }

@@ -5,6 +5,7 @@
 package com.clinica.clinica.domain.RepositorysDomain;
 
 import com.clinica.clinica.domain.CitasDomain;
+import com.clinica.clinica.domain.DomainDtos.UpdateCitaDto;
 import com.clinica.clinica.domain.MedicoDomain;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,4 +20,5 @@ public interface RepositoryCita {
     public Object[]CitasDelDia(String correo);
     public CitasDomain CancelarCitas(Long cancelarCita);
     public boolean AvaileableDateAndDoctor(MedicoDomain medico, LocalDateTime horaYfecha);
+public void GenerarPdf(UpdateCitaDto dto, String principal);
 }

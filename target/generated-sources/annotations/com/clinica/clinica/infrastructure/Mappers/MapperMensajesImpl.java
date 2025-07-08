@@ -9,5 +9,5 @@ import org.springframework.stereotype.Component;
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.2 (Oracle Corporation)"
 )
 @Component
-public class MapperPacienteImpl implements MapperPaciente {
+public class MapperMensajesImpl implements MapperMensajes {
 }

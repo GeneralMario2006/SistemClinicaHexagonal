@@ -1,13 +1,17 @@
 package com.clinica.clinica.infrastructure.Controllers;
 
 import com.clinica.clinica.Application.Service.DoctorService;
+import com.clinica.clinica.Application.Service.ServiceCita;
+import com.clinica.clinica.domain.DomainDtos.UpdateCitaDto;
 import com.clinica.clinica.domain.MedicoDomain;
 import com.clinica.clinica.infrastructure.RequestDTO.ActualizarCitasDTO;
 import com.clinica.clinica.infrastructure.RequestDTO.MedicoDTO;
 import com.clinica.clinica.infrastructure.Entitys.Medico;
 import com.clinica.clinica.infrastructure.JWT.JwtProvider;
+import com.clinica.clinica.infrastructure.Mappers.MapperCitas;
 import com.clinica.clinica.infrastructure.Mappers.MapperMedico;
 import com.clinica.clinica.infrastructure.Security.MedicoDetails;
+import java.security.Principal;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,11 +38,14 @@ public class ControllersMedicos {
     @Autowired
     AuthenticationManager authenticationManager;
     
-    //@Autowired
-    //PDFservice pdfService; 
+    @Autowired
+    MapperCitas mapperDates;
             
     @Autowired
     DoctorService serviceMedico;
+    
+    @Autowired
+    ServiceCita citaService;
     
     @PostMapping("/Registro")
  public ResponseEntity<?>Registrar(@RequestBody Medico medico) {
@@ -77,16 +84,18 @@ public class ControllersMedicos {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Credenciales incorrectas."+e.getMessage());
         }
     }
-    /*
+    
     @PostMapping("/ActualizarCita")
     public ResponseEntity<?>Actualizar(@RequestBody ActualizarCitasDTO id, Principal principal){
         try {
-            pdfService.GenerarPDF(id, principal);
+            UpdateCitaDto updateDateDomain= mapperDates.UpdateDtoToDomain(id);
+            String correoPrincipal= principal.getName();
+            citaService.AceptarCita(updateDateDomain, correoPrincipal);
             return ResponseEntity.ok().build();
         }catch(ResponseStatusException e) {
-            return ResponseEntity.badRequest().body(e);
+            return ResponseEntity.badRequest().body("Error: "+e);
         }
     }
-*/
+
  
 }
