@@ -25,7 +25,7 @@ public interface MapperCitas {
                 
                 new MedicoDomain(citaEntity.getMedico().getId(),  citaEntity.getMedico().getCorreoInstitucional(),  citaEntity.getMedico().getNombre(), 
                 citaEntity.getMedico().getEspecialidad(),  citaEntity.getMedico().getContraseña(),  citaEntity.getMedico().getHorarioInicio(), 
-                citaEntity.getMedico().getHorarioCierre()), 
+                citaEntity.getMedico().getHorarioCierre(), citaEntity.getMedico().getFirma()), 
                 
                     citaEntity.getFechaCita(),
                     citaEntity.getEstado(), 
@@ -42,7 +42,7 @@ public interface MapperCitas {
                 ,
                 new Medico(citaDomain.getMedico().getCorreoInstitucional(), citaDomain.getMedico().getNombre(),
                 citaDomain.getMedico().getEspecialidad(), citaDomain.getMedico().getContraseña(), 
-                citaDomain.getMedico().getHorarioInicio(), citaDomain.getMedico().getHorarioCierre()
+                citaDomain.getMedico().getHorarioInicio(), citaDomain.getMedico().getHorarioCierre(), citaDomain.getMedico().getFirma()
                 )
                 ,
                         citaDomain.getFechaCita(),
@@ -54,7 +54,7 @@ public interface MapperCitas {
             public default CitasDomain CitasDtoToDomain(CitaDTO citaDto) {
             return new CitasDomain(
             new PacientesDomain(null, null, null, citaDto.getDui(), null, null, null, null),
-                   new MedicoDomain(citaDto.getIdMedico(), null, null, null, null, null, null),
+                   new MedicoDomain(citaDto.getIdMedico(), null, null, null, null, null, null, null),
                 citaDto.getFechaCita(),
                     null,
                     citaDto.getMotivo()

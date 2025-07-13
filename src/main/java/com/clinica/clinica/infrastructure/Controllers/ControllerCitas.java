@@ -10,13 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/Citas")
@@ -41,11 +43,13 @@ public class ControllerCitas {
     @GetMapping("/VerCitas/{correo}")
 public ResponseEntity<?> listarCitas(
     @PathVariable String correo,
-    Principal principal) {
+    Principal principal,
+    @RequestParam int pagina,
+        @RequestParam int tamaño) {
     System.out.println("Accediendo a listar citas");
     try {
         String correoAutenticado= principal.getName();
-        List<CitasDomain> citasPaginadas = serviceCita.listarCitas(correoAutenticado, correo);
+        Page<CitasDomain> citasPaginadas = serviceCita.listarCitas(correoAutenticado, correo, tamaño, pagina);
         return ResponseEntity.ok(citasPaginadas);
     } catch (Exception e) {
         System.out.println("error" + e.getMessage());
@@ -55,25 +59,35 @@ public ResponseEntity<?> listarCitas(
 }
     
     
-/*
 @PutMapping("/Cancelar/{id}")
 public ResponseEntity<?>ActualizarCitasCancelada(@PathVariable Long id) {
-    validarCitas.CancelarCita(id);
+    serviceCita.CancelarCita(id);
     return ResponseEntity.ok().build();
 }
-*/
+
     
 @GetMapping("/CitasDelDia")
 public ResponseEntity<?>VerCitasDelDia(Principal principal) {
-    try{
         String correo= principal.getName();
-    Object[] citasPaginadas = serviceCita.CitasDelDia(correo);
-    return ResponseEntity.ok(citasPaginadas);
-    }catch(ResponseStatusException e) {
-        return ResponseEntity.status(e.getStatusCode()).build();
+    List<Object[]> citasPaginadas = serviceCita.CitasDelDia(correo);
+    if (citasPaginadas.isEmpty()) {
+        return ResponseEntity.ok("No hay citas para este dia.");
     }
+    return ResponseEntity.ok(citasPaginadas);
+    
 }
 
+@GetMapping("/ResumenDelMes")
+@PreAuthorize("hasRole('Medico')")
+public ResponseEntity<?>ResumenDelMes() {
+    return ResponseEntity.ok(serviceCita.ResumenMensual());
+}
+
+@GetMapping("/CitasPorEspecialidad")
+public ResponseEntity<?>ResumenPorEspecialidad() {
+    
+    return ResponseEntity.ok(serviceCita.ResumenPorEspecialidad());
+}
 
 
 }

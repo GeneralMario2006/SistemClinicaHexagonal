@@ -20,9 +20,9 @@ public interface MapperMensajes {
     
     public default MensajesDomain MsjDtoToDomain(MensajeDTO dto) {
         return new MensajesDomain(
-        new PacientesDomain(null, null, null, null,null,null,null,null)
+        new PacientesDomain(null, null, dto.getCorreo(), null,null,null,null,null)
                 ,
-                new MedicoDomain(null, dto.getCorreo(), null,null,null,null,null)
+                new MedicoDomain(null, dto.getCorreo(), null,null,null,null,null, null)
                 ,
                 dto.getContenido(),
                 null
@@ -34,7 +34,7 @@ public interface MapperMensajes {
         new PacientesDomain (entityMsj.getPaciente().getId(), entityMsj.getPaciente().getNombre(), entityMsj.getPaciente().getCorreo(), entityMsj.getPaciente().getDui(), entityMsj.getPaciente().getFechaNacimiento(), entityMsj.getPaciente().getTelefono(), entityMsj.getPaciente().getContraseña(), entityMsj.getPaciente().getRol())
                 ,
                 new MedicoDomain(
-                        entityMsj.getMedico().getId(), entityMsj.getMedico().getCorreoInstitucional(), entityMsj.getMedico().getNombre(), entityMsj.getMedico().getEspecialidad(), entityMsj.getMedico().getContraseña(), entityMsj.getMedico().getHorarioInicio(), entityMsj.getMedico().getHorarioCierre())
+                        entityMsj.getMedico().getId(), entityMsj.getMedico().getCorreoInstitucional(), entityMsj.getMedico().getNombre(), entityMsj.getMedico().getEspecialidad(), entityMsj.getMedico().getContraseña(), entityMsj.getMedico().getHorarioInicio(), entityMsj.getMedico().getHorarioCierre(), entityMsj.getMedico().getFirma())
                 ,
                 entityMsj.getContenido(),
                 entityMsj.getRemitente()

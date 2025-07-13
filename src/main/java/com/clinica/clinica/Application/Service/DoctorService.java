@@ -7,6 +7,7 @@ package com.clinica.clinica.Application.Service;
 import com.clinica.clinica.domain.MedicoDomain;
 import com.clinica.clinica.domain.RepositorysDomain.RepositoryMedicos;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -20,7 +21,7 @@ public class DoctorService {
         this.repoMedico = repoMedico;
     }
     
-    public MedicoDomain SaveDoctor(MedicoDomain medicoDomain) {
-       return repoMedico.AgregarMedico(medicoDomain);
+    public MedicoDomain SaveDoctor(MedicoDomain medicoDomain, String nameFile, MultipartFile file) {
+       return repoMedico.AgregarMedico(medicoDomain, file);
     }
 }

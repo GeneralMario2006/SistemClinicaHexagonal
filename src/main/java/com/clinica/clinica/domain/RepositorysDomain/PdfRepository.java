@@ -4,15 +4,12 @@
  */
 package com.clinica.clinica.domain.RepositorysDomain;
 
-import com.clinica.clinica.domain.MedicoDomain;
-import org.springframework.web.multipart.MultipartFile;
+import com.clinica.clinica.domain.DomainDtos.UpdateCitaDto;
 
 /**
  *
  * @author mr587
  */
-public interface RepositoryMedicos {
-    public MedicoDomain AgregarMedico(MedicoDomain medico, MultipartFile file);
-    public MedicoDomain FindById(Long id);
-    
+public interface PdfRepository {
+    public String GenerarPdf(UpdateCitaDto dto, String principal);
 }

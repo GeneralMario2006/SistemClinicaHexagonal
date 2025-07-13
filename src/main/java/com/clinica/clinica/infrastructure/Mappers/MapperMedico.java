@@ -6,6 +6,7 @@ package com.clinica.clinica.infrastructure.Mappers;
 
 import com.clinica.clinica.domain.MedicoDomain;
 import com.clinica.clinica.infrastructure.Entitys.Medico;
+import com.clinica.clinica.infrastructure.RequestDTO.RegisterDoctorDto;
 import org.mapstruct.Mapper;
 
 /**
@@ -21,7 +22,8 @@ public interface MapperMedico {
                 medicoDomain.getEspecialidad(),
                 medicoDomain.getContraseña(),
                 medicoDomain.getHorarioInicio(),
-                medicoDomain.getHorarioCierre()
+                medicoDomain.getHorarioCierre(),
+                medicoDomain.getFirma()
         );
     }
     
@@ -32,7 +34,16 @@ public interface MapperMedico {
                medicoEntity.getEspecialidad(),
                medicoEntity.getContraseña(),
                medicoEntity.getHorarioInicio(),
-               medicoEntity.getHorarioCierre()
+               medicoEntity.getHorarioCierre(),
+               medicoEntity.getFirma()
        );
+    }
+    
+    public default MedicoDomain DoctorDtToDomain(RegisterDoctorDto dtoDoctor) {
+        return new MedicoDomain(
+        null, dtoDoctor.getCorreoInstitucional(), dtoDoctor.getNombre(), dtoDoctor.getEspecialidad(),
+                dtoDoctor.getContraseña(), dtoDoctor.getHorarioInicio(), dtoDoctor.getHorarioCierre(),
+                null
+        );
     }
 }

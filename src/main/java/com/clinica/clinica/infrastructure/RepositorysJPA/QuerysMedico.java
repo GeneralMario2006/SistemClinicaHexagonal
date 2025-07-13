@@ -8,9 +8,11 @@ import com.clinica.clinica.domain.MedicoDomain;
 import com.clinica.clinica.domain.RepositorysDomain.RepositoryMedicos;
 import com.clinica.clinica.infrastructure.Entitys.Medico;
 import com.clinica.clinica.infrastructure.Mappers.MapperMedico;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -31,17 +33,22 @@ public class QuerysMedico implements RepositoryMedicos {
     }
     
     @Override
-    public MedicoDomain AgregarMedico(MedicoDomain medico) {
+    public MedicoDomain AgregarMedico(MedicoDomain medico, MultipartFile file) {
+try{
         if (querysMedico.findByCorreoInstitucional(medico.getCorreoInstitucional()).isPresent()) {
             throw new IllegalArgumentException("ya existe.");
         }
+        
         medico.setContraseña(PE.encode(medico.getContraseña()));
         medico.setRol("MEDICO");
-        
+        medico.setFirma(file.getBytes());
         Medico entidad= mapper.MedicoDomainToEntity(medico);
         Medico guardar= querysMedico.save(entidad);
-        
         return mapper.MedicoEntityToDomain(guardar);
+        }catch(IOException e) {
+            System.out.println("Error: "+e);
+        }
+        return medico;
     }
 
     @Override

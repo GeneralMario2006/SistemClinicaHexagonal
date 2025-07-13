@@ -2,41 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.clinica.clinica.domain;
+package com.clinica.clinica.infrastructure.RequestDTO;
 
 import java.time.LocalTime;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author mr587
  */
-public class MedicoDomain {
-    Long id;
+public class RegisterDoctorDto {
     String nombre, especialidad;
     String correoInstitucional;
-    LocalTime horarioInicio, horarioCierre;
-    public String contraseña;
-    byte[] firma;
-    String rol;
     
+    LocalTime horarioInicio, horarioCierre;
+    
+    public String contraseña;
 
-    public MedicoDomain(Long id, String correoInstitucional, String nombre, String especialidad, String contraseña, LocalTime horarioInicio, LocalTime horarioCierre, byte[]firma ) {
+    public RegisterDoctorDto(String nombre, String especialidad, String correoInstitucional, LocalTime horarioInicio, LocalTime horarioCierre, String contraseña) {
         this.nombre = nombre;
-        this.id= id;
         this.especialidad = especialidad;
-        this.contraseña= contraseña;
-        this.correoInstitucional= correoInstitucional;
-        this.horarioInicio= horarioInicio;
-        this.horarioCierre= horarioCierre;
-        this.firma=firma;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.correoInstitucional = correoInstitucional;
+        this.horarioInicio = horarioInicio;
+        this.horarioCierre = horarioCierre;
+        this.contraseña = contraseña;
+        
     }
 
     public String getNombre() {
@@ -55,30 +45,12 @@ public class MedicoDomain {
         this.especialidad = especialidad;
     }
 
-  
-
     public String getCorreoInstitucional() {
         return correoInstitucional;
     }
 
     public void setCorreoInstitucional(String correoInstitucional) {
         this.correoInstitucional = correoInstitucional;
-    }
-
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public LocalTime getHorarioInicio() {
@@ -97,13 +69,13 @@ public class MedicoDomain {
         this.horarioCierre = horarioCierre;
     }
 
-    public byte[] getFirma() {
-        return firma;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setFirma(byte[] firma) {
-        this.firma = firma;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
-    
-    
+
+ 
 }

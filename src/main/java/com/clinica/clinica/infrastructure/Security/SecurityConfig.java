@@ -36,7 +36,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
     .authorizeHttpRequests(auth -> auth
     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-    .requestMatchers("/SesionMedicos/Registro", "/SesionMedicos/login").permitAll()
+    .requestMatchers("/SesionMedicos/login").permitAll()
     .requestMatchers("/Pacientes/Login").permitAll()
 
     // Accesos especiales
@@ -48,9 +48,11 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             
 
     // Rutas protegidas
+            .requestMatchers("/SesionMedicos/Registro").hasRole("MEDICO")
     .requestMatchers("/SesionMedicos/**", "/Pacientes/CrearPaciente").hasRole("MEDICO")
     .requestMatchers("/Pacientes/**").hasRole("PACIENTE")
     .requestMatchers("/Citas/**").hasRole("MEDICO")
+            
 
     .anyRequest().authenticated()
 )

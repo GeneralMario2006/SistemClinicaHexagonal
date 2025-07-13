@@ -9,6 +9,7 @@ com\clinica\clinica\infrastructure\Entitys\Mensajes.class
 com\clinica\clinica\infrastructure\RepositorysJPA\RepositoryJpaMensajes.class
 com\clinica\clinica\infrastructure\Mappers\MapperCitasImpl.class
 com\clinica\clinica\infrastructure\RepositorysJPA\QuerysPatient.class
+com\clinica\clinica\domain\RepositorysDomain\PdfRepository.class
 com\clinica\clinica\infrastructure\RepositorysJPA\QuerysMensajes.class
 com\clinica\clinica\ProyectApplication.class
 com\clinica\clinica\infrastructure\JWT\UserDetailsServiceImpl.class
@@ -24,7 +25,9 @@ com\clinica\clinica\infrastructure\Entitys\Citas.class
 com\clinica\clinica\infrastructure\Mappers\MapperPacienteImpl.class
 com\clinica\clinica\infrastructure\Security\Cors.class
 com\clinica\clinica\infrastructure\RequestDTO\ActualizarCitasDTO.class
+com\clinica\clinica\Application\Service\PDFservice.class
 com\clinica\clinica\domain\RepositorysDomain\RepositoryMedicos.class
+com\clinica\clinica\infrastructure\RepositorysJPA\QuerysPdf.class
 com\clinica\clinica\Application\Service\ServiceMessage.class
 com\clinica\clinica\infrastructure\Mappers\MapperCitas.class
 com\clinica\clinica\infrastructure\Mappers\MapperPaciente.class
@@ -46,6 +49,7 @@ com\clinica\clinica\domain\RepositorysDomain\MensajesRepositoryNoJpa.class
 com\clinica\clinica\infrastructure\RepositorysJPA\QuerysCitas.class
 com\clinica\clinica\infrastructure\RequestDTO\PacienteDTO.class
 com\clinica\clinica\infrastructure\JWT\JwtProvider.class
+com\clinica\clinica\infrastructure\RequestDTO\RegisterDoctorDto.class
 com\clinica\clinica\infrastructure\RepositorysJPA\RepositoryCitas.class
 com\clinica\clinica\infrastructure\RepositorysJPA\RepositoryPaciente.class
 com\clinica\clinica\domain\DomainDtos\UpdateCitaDto.class

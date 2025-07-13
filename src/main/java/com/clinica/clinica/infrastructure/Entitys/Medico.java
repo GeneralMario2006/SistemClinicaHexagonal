@@ -10,12 +10,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
 import jakarta.persistence.Id; // ✅
+import jakarta.persistence.Lob;
 import java.time.LocalTime;
 
 @Entity
 @Table(name= "medicos")
 public class Medico {
-    
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
@@ -37,6 +37,10 @@ public class Medico {
     
     public String contraseña;
     
+@Lob
+@Column(name = "firma", columnDefinition = "LONGBLOB")
+private byte[] firma;
+
     
 
     String rol;
@@ -44,13 +48,14 @@ public class Medico {
     public Medico() {
     }
 
-    public Medico(String correoInstitucional, String nombre, String especialidad, String contraseña, LocalTime horarioInicio, LocalTime horarioCierre) {
+    public Medico(String correoInstitucional, String nombre, String especialidad, String contraseña, LocalTime horarioInicio, LocalTime horarioCierre, byte[] firma) {
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.contraseña= contraseña;
         this.correoInstitucional= correoInstitucional;
         this.horarioInicio= horarioInicio;
         this.horarioCierre= horarioCierre;
+        this.firma=firma;
     }
 
     public Long getId() {
@@ -123,6 +128,14 @@ public class Medico {
 
     public void setHorarioCierre(LocalTime horarioCierre) {
         this.horarioCierre = horarioCierre;
+    }
+
+    public byte[] getFirma() {
+        return firma;
+    }
+
+    public void setFirma(byte[] firma) {
+        this.firma = firma;
     }
     
     

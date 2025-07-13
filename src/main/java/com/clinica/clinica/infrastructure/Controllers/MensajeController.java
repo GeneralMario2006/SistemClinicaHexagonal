@@ -9,6 +9,7 @@ import com.clinica.clinica.domain.MensajesDomain;
 import com.clinica.clinica.infrastructure.Mappers.MapperMensajes;
 import com.clinica.clinica.infrastructure.RequestDTO.MensajeDTO;
 import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,10 @@ public class MensajeController {
     @GetMapping("/VerMensajesMedicos/{correoMedico}")
     public ResponseEntity<?>VerMensajesDeMedicos(@PathVariable("correoMedico") String correo, Principal principal) {
         String correoPaciente= principal.getName();
+        List<Object> VerMensajesComoPacientes = mensajeService.VerMensajesComoPaciente(correoPaciente, correo);
+        if(VerMensajesComoPacientes.isEmpty()) {
+            return ResponseEntity.ok("No hay mensajes aun");
+        }
         return ResponseEntity.ok(mensajeService.VerMensajesComoPaciente(correoPaciente, correo));
     }
     
@@ -69,7 +74,11 @@ public class MensajeController {
     public ResponseEntity<?>VerMensajesDePacientes(@PathVariable String correo, Principal principal) {
        try {
         String emailPrincipal= principal.getName();
-        return ResponseEntity.ok(mensajeService.VerMensajesComoMedicoPacientes(emailPrincipal, correo));
+           List<Object> VerMensajesComoMedicoPacientes = mensajeService.VerMensajesComoMedicoPacientes(emailPrincipal, correo);
+           if (VerMensajesComoMedicoPacientes.isEmpty()) {
+               return ResponseEntity.ok("No hay mensajes.");
+           }
+        return ResponseEntity.ok(VerMensajesComoMedicoPacientes);
         }catch(ResponseStatusException e){
             return ResponseEntity.badRequest().body("Error: "+e);
         }
